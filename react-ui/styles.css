@@ -1,0 +1,296 @@
+/**
+ * Styles for 20-20-20 Break Reminder App
+ * 
+ * Clean, minimal design with calm colors
+ * Large readable text for accessibility
+ */
+
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+}
+
+.app {
+  width: 100%;
+  height: 100%;
+}
+
+/* Screen Base Styles */
+.screen {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.screen-content {
+  text-align: center;
+  padding: 2rem;
+  max-width: 800px;
+  width: 100%;
+}
+
+/* Work Screen Styles */
+.work-screen {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.screen-title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.screen-subtitle {
+  font-size: 1.5rem;
+  font-weight: 300;
+  margin-bottom: 3rem;
+  opacity: 0.9;
+}
+
+.timer-container {
+  margin: 3rem 0;
+}
+
+.timer {
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+
+.timer-large {
+  font-size: 8rem;
+  color: white;
+}
+
+.timer-extra-large {
+  font-size: 4rem;
+  color: white;
+}
+
+.timer-label {
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  opacity: 0.8;
+  font-weight: 300;
+}
+
+.info-box {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+
+.info-text {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.tip-box {
+  margin-top: 2rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  border-left: 4px solid rgba(255, 255, 255, 0.3);
+}
+
+.tip-text {
+  font-size: 1rem;
+  opacity: 0.9;
+  line-height: 1.5;
+}
+
+/* Break Screen Styles */
+.break-screen {
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  color: white;
+}
+
+.break-title {
+  font-size: 4rem;
+  margin-bottom: 2rem;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.02);
+  }
+}
+
+.break-timer-container {
+  margin: 3rem 0;
+}
+
+/* Progress Ring Styles */
+.progress-ring-wrapper {
+  position: relative;
+  display: inline-block;
+  margin: 2rem 0;
+}
+
+.progress-ring {
+  transform: rotate(-90deg);
+}
+
+.progress-ring-circle-bg {
+  opacity: 0.3;
+}
+
+.progress-ring-circle {
+  transition: stroke-dashoffset 0.3s ease;
+  stroke-linecap: round;
+}
+
+.progress-ring-timer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Break Message Styles */
+.break-message {
+  margin: 3rem 0;
+}
+
+.break-instruction {
+  font-size: 3rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.break-subinstruction {
+  font-size: 2rem;
+  font-weight: 300;
+  opacity: 0.9;
+}
+
+/* Eye Animation */
+.eye-animation {
+  margin: 3rem 0;
+  animation: blink 3s ease-in-out infinite;
+}
+
+.eye-icon {
+  font-size: 5rem;
+}
+
+@keyframes blink {
+  0%, 90%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  95% {
+    opacity: 0.3;
+    transform: scale(0.95);
+  }
+}
+
+/* Safety Notice */
+.safety-notice {
+  margin-top: 4rem;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  opacity: 0.7;
+}
+
+.safety-text {
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+kbd {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  padding: 0.2rem 0.5rem;
+  font-family: 'Monaco', 'Courier New', monospace;
+  font-size: 0.85rem;
+  font-weight: 600;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  display: inline-block;
+  margin: 0 0.2rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .screen-title {
+    font-size: 2rem;
+  }
+  
+  .break-title {
+    font-size: 2.5rem;
+  }
+  
+  .timer-large {
+    font-size: 5rem;
+  }
+  
+  .timer-extra-large {
+    font-size: 3rem;
+  }
+  
+  .break-instruction {
+    font-size: 2rem;
+  }
+  
+  .break-subinstruction {
+    font-size: 1.5rem;
+  }
+  
+  .eye-icon {
+    font-size: 3rem;
+  }
+}
+
+/* Prevent text selection and dragging */
+.screen,
+.timer,
+.screen-title,
+.break-instruction {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Smooth transitions */
+.timer,
+.progress-ring-circle {
+  transition: all 0.3s ease;
+}

@@ -1,0 +1,66 @@
+{
+  "name": "break-reminder-20-20-20",
+  "version": "1.0.0",
+  "description": "A macOS app to enforce the 20-20-20 eye care rule",
+  "main": "electron/main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "concurrently \"npm run react-start\" \"wait-on http://localhost:3000 && electron .\"",
+    "react-start": "BROWSER=none react-scripts start",
+    "react-build": "react-scripts build",
+    "build": "npm run react-build && electron-builder",
+    "build:mac": "npm run react-build && electron-builder --mac",
+    "dist": "npm run react-build && electron-builder --publish=never"
+  },
+  "keywords": [
+    "electron",
+    "break-reminder",
+    "20-20-20",
+    "eye-care"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "concurrently": "^8.2.0",
+    "electron": "^27.0.0",
+    "electron-builder": "^24.6.4",
+    "react-scripts": "5.0.1",
+    "wait-on": "^7.0.1"
+  },
+  "build": {
+    "appId": "com.breakreminder.app",
+    "productName": "20-20-20 Break Reminder",
+    "directories": {
+      "buildResources": "build"
+    },
+    "files": [
+      "electron/**/*",
+      "build/**/*",
+      "package.json"
+    ],
+    "mac": {
+      "category": "public.app-category.healthcare-fitness",
+      "target": [
+        "dmg"
+      ]
+    }
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
