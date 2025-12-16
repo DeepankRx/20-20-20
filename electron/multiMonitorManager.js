@@ -39,7 +39,16 @@ class MultiMonitorManager {
         webPreferences: {
           nodeIntegration: false,
           contextIsolation: true,
-          preload: path.join(__dirname, 'preload.js'),
+          // Preload path - handle both dev and production
+          preload: (() => {
+            const { app } = require('electron');
+            const preloadPath = path.join(__dirname, 'preload.js');
+            // In packaged app, if __dirname is build/, go to electron/preload.js
+            if (app.isPackaged && __dirname.includes('build')) {
+              return path.join(app.getAppPath(), 'electron', 'preload.js');
+            }
+            return preloadPath;
+          })(),
         },
       });
 
@@ -47,7 +56,15 @@ class MultiMonitorManager {
       if (isDev) {
         breakWindow.loadURL('http://localhost:3000');
       } else {
-        breakWindow.loadFile(path.join(__dirname, '../build/index.html'));
+        const { app } = require('electron');
+        // Use app.getAppPath() to get correct path in production
+        const indexPath = path.join(app.getAppPath(), 'build', 'index.html');
+        breakWindow.loadFile(indexPath).catch(err => {
+          console.error('Error loading index.html in break window:', err);
+          // Fallback to relative path
+          const fallbackPath = path.join(__dirname, '..', 'build', 'index.html');
+          breakWindow.loadFile(fallbackPath);
+        });
       }
 
       // Make window non-movable and non-resizable

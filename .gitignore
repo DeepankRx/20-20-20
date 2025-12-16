@@ -6,3 +6,8 @@ dist/
 .env
 .env.local
 electron-builder.yml
+
+# Keep icon files
+!build/icon.icns
+!build/icon.svg
+!build/entitlements.mac.plist

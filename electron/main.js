@@ -106,13 +106,25 @@ function createWindow() {
       // Security: Enable context isolation and disable node integration
       nodeIntegration: false,
       contextIsolation: true,
-      // Preload script acts as bridge between main and renderer
-      preload: path.join(__dirname, 'preload.js'),
+      // Preload script - handle both dev and production paths
+      // In dev: __dirname = project/electron/, so preload.js is in same dir
+      // In production: If main.js is in electron/, __dirname = app.asar/electron/
+      // If somehow in build/, we need to go to electron/preload.js
+      preload: (() => {
+        const preloadPath = path.join(__dirname, 'preload.js');
+        // In packaged app, if __dirname is build/, go to electron/preload.js
+        if (app.isPackaged && __dirname.includes('build')) {
+          return path.join(app.getAppPath(), 'electron', 'preload.js');
+        }
+        return preloadPath;
+      })(),
+      // Allow loading local files (needed for production builds)
+      webSecurity: true,
     },
     // Start in fullscreen for better experience
     fullscreen: false, // We'll manage fullscreen manually
     frame: true,
-    title: '20-20-20 Break Reminder',
+    title: '20-20-20',
   });
 
   // Initialize window manager
@@ -128,7 +140,13 @@ function createWindow() {
     // Open DevTools in development
     mainWindow.webContents.openDevTools();
   } else {
-    mainWindow.loadFile(path.join(__dirname, '../build/index.html'));
+    // In production, when packaged, files are in app.asar/build/
+    // When packaged: __dirname = app.asar/electron/
+    // So ../build/index.html = app.asar/build/index.html
+    const indexPath = path.join(__dirname, '..', 'build', 'index.html');
+    
+    // Load the file - loadFile handles ASAR archives automatically
+    mainWindow.loadFile(indexPath);
   }
 
   // Handle window closed

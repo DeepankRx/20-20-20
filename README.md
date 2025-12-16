@@ -1,5 +1,4 @@
-# 20-20-20 Break Reminder App
-# 20-20-20 Break Reminder App
+# 20-20-20
 
 A macOS desktop application built with Electron and React that enforces the 20-20-20 eye care rule. After every 20 minutes of work, the app forces you to take a 20-second break to look at something 20 feet away.
 
